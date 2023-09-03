@@ -6,7 +6,7 @@ import altair as alt
 import pydeck as pdk
 import plotly.express as px
 
-DATA_FILE = 'rfm_segments.csv'
+DATA_FILE = 'rfm.csv'
 
 st.title("Interactive Plot to Analysis Final RFM Segments")
 
