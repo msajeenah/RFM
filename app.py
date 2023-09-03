@@ -13,11 +13,11 @@ st.title("Interactive Plot to Analysis Final RFM Segments")
 @st.cache(persist=True)
 def load_data():
     data = pd.read_csv(DATA_FILE)
-    data = data[(data['MonetaryValue'] > 0) & (data['Recency'] <=360) & (data['Frequency'] <= 100)]
+    data = data[(data['Item Price'] > 0) & (data['Grand Total'] <=360) & (data['LBP Rate'] <= 100)]
     return data
 
 data = load_data()
-segments = data['Customer Segment'].unique()
+segments = data['Category Cut'].unique()
 
 #build app filters
 column = st.sidebar.multiselect('Select Segments', segments)
@@ -25,7 +25,7 @@ recency = st.sidebar.number_input('Smaller Than Recency', 0, 360, 360)
 frequency= st.sidebar.number_input('Smaller Than Frequency', 0, 100, 100)
 monetaryValue = st.sidebar.number_input('Smaller Than Monetary Value', 0, 100000, 100000)
 
-data = data[(data['Recency']<=recency) & (data['Frequency']<=frequency) & (data['MonetaryValue']<=monetaryValue)]
+data = data[(data['Grand Total']<=Grand Total) & (data['LBP Rate']<=LBP Rate) & (data['Item Price']<=Item Price)]
 
 #manage the multiple field filter
 if column == []:
@@ -37,23 +37,23 @@ data
 
 st.subheader('RFM Scatter Plot')
 #scatter plot
-fig_scatter = px.scatter(data, x="Recency", y="Frequency", color="Customer Segment",
-                 size='MonetaryValue', hover_data=['R_Quartile', 'F_Quartile', 'M_Quartile'])
+fig_scatter = px.scatter(data, x="Grand Total", y="LBP Rate", color="Item Price",
+                 size='Grand Total', hover_data=['Total Discount', 'Coupon Code', 'Shipping Fees'])
 
 st.plotly_chart(fig_scatter)
 
 #show distribution of values
 #recency
-fig_r = px.histogram(data, x="Recency", y="CustomerID", marginal="box", # or violin, rug
-                   hover_data=data.columns, title='Recency Plot')
+fig_r = px.histogram(data, x="Grand Total", y="Order ID", marginal="box", # or violin, rug
+                   hover_data=data.columns, title='Total Plot')
 st.plotly_chart(fig_r)
 
 #frequency
-fig_f = px.histogram(data, x="Frequency", y="CustomerID", marginal="box", # or violin, rug
-                   hover_data=data.columns, title='Frequency Plot')
+fig_f = px.histogram(data, x="LBP Rate", y="Order ID", marginal="box", # or violin, rug
+                   hover_data=data.columns, title='Rate Plot')
 st.plotly_chart(fig_f)
 
 #monetary value
-fig_m = px.histogram(data, x="MonetaryValue", y="CustomerID", marginal="box", # or violin, rug
-                   hover_data=data.columns, title='Monetary Value Plot')
+fig_m = px.histogram(data, x="Item Price", y="Order ID", marginal="box", # or violin, rug
+                   hover_data=data.columns, title='Item  Plot')
 st.plotly_chart(fig_m)
