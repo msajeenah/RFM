@@ -21,7 +21,7 @@ segments = data['Category Cut'].unique()
 
 #build app filters
 column = st.sidebar.multiselect('Select Segments', segments)
-Grand Total = st.sidebar.number_input('Smaller Than Recency', 0, 360, 360)
+
 LBP Rate = st.sidebar.number_input('Smaller Than Frequency', 0, 100, 100)
 Item Price = st.sidebar.number_input('Smaller Than Monetary Value', 0, 100000, 100000)
 
