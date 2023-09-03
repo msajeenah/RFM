@@ -79,9 +79,6 @@ def rfm(inputfile, outputfile, inputdate):
 
    rfmSegmentation.to_csv(outputfile, sep=',')
 
-   print " "
-   print " DONE! Check %s" % (outputfile)
-   print " "
 
 # We create two classes for the RFM segmentation since, being high recency is bad, while high frequency and monetary value is good. 
 # Arguments (x = value, p = recency, monetary_value, frequency, k = quartiles dict)
