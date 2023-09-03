@@ -48,10 +48,7 @@ def main(argv):
 
 
 def rfm(inputfile, outputfile, inputdate):
-   print " "
-   print "---------------------------------------------"
-   print " Calculating RFM segmentation for " + inputdate
-   print "---------------------------------------------"
+
 
    NOW = datetime.strptime(inputdate, "%Y-%m-%d")
 
