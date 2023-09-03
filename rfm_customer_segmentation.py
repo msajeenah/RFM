@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import datetime as dt
-import missingno as msno
 import plotly.express as px
 
 
